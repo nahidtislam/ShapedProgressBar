@@ -11,7 +11,7 @@ import SwiftUI
 struct ShapedProgressBarApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PlayView()
         }
     }
 }
