@@ -55,7 +55,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
     }
     private var arc: some View {
         base()
-            .trim(from: 0, to: min(1, value))
+            .trim(from: 0, to: value)
             .stroke(aGrad, style: sStyle)
     }
     
@@ -69,7 +69,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
             colors: [trailingColor, leadingColor],
             center: .center,
             startAngle: apropiateStartAngle,
-            endAngle: progressAngle
+            endAngle: value > 0.1 ? progressAngle : .radians(2 * .pi * 0.1)
         )
     }
     
@@ -101,20 +101,21 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
 //                )
 //            }
     }
+    
     private var cycledTip: some View {
-        //TODO: make it work with other shapes other than Circle
+        //TODO: make it work with other shapes other than `Circle`
         base()
             .trim(from: 0, to: 0.0001)
             .stroke(style: sStyle)
             .foregroundColor(leadingColor)
-            .rotationEffect(.radians(2 * .pi * value))
+//            .transition(.asymmetric(insertion: .opacity.animation(.linear.speed(value)), removal: .opacity.animation(.none)))
             .shadow(color: .black, radius: 12)
             .mask {
                 base()
                     .trim(from: 0, to: 0.5)
                     .stroke(style: sStyle)
-                    .rotation(.radians((2 * .pi) * value))
             }
+            .rotationEffect(progressAngle)
     }
 }
 
