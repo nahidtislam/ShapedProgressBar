@@ -61,6 +61,9 @@ struct PlayView: View {
             if let trail = Color(hex: storedSettings.trailColor, colorSpace: .displayP3) {
                 trailColor = trail
             }
+            if let outline = Color(hex: storedSettings.outlineColor ?? "nil", colorSpace: .displayP3) {
+                outlineColorHandler = outline
+            }
         }
         .onChange(of: storedSettings.useSlider) { newValue in
             useSlider = newValue

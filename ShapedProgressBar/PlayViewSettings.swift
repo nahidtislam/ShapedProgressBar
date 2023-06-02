@@ -11,12 +11,26 @@ struct PlayViewSettings: View {
     
     @AppStorage("settings") var settings: SettingsData = .base
     
+    @State private var maxValue = "1.50"
+    
     var body: some View {
         NavigationView {
             List {
                 Section("colors after relaunch") {
-                    ColorPicker("leading color", selection: leadColor)
-                    ColorPicker("trailing color", selection: trailColor)
+                    ColorPicker("leading color", selection: leadColor, supportsOpacity: false)
+                    ColorPicker("trailing color", selection: trailColor, supportsOpacity: false)
+                    HStack {
+                        ColorPicker("outline color", selection: outlineColor)
+                        if settings.outlineColor != nil {
+                            Button("remove outline") {
+                                withAnimation {
+                                    settings.outlineColor = nil
+                                }
+                            }
+                            .buttonStyle(.bordered)
+                            .transition(.scale)
+                        }
+                    }
                 }
                 
                 Section("value") {
@@ -60,7 +74,7 @@ struct PlayViewSettings: View {
             settings.leadColor = color.hexValue ?? "#000000"
         }
     }
-
+    
     var trailColor: Binding<Color> {
         .init {
             Color(hex: settings.trailColor, colorSpace: .displayP3) ?? .clear
@@ -68,16 +82,14 @@ struct PlayViewSettings: View {
             settings.trailColor = color.hexValue ?? "#000000"
         }
     }
-    @State private var maxValue = "1.50"
-//    var maxValue: Binding<String> {
-//        .init {
-//            String(format: "%.2f", settings.maxValue)
-//        } set: { text in
-//            let value = Double(text) ?? 1.5
-//            settings.maxValue = value
-//        }
-//
-//    }
+    
+    var outlineColor: Binding<Color> {
+        .init {
+            Color(hex: settings.outlineColor ?? "nil", colorSpace: .displayP3) ?? .clear
+        } set: { color in
+            settings.outlineColor = color.hexValue
+        }
+    }
 }
 
 struct PlayViewSettings_Previews: PreviewProvider {

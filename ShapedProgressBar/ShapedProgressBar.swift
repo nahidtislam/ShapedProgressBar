@@ -16,25 +16,28 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
     
     @Environment(\.layoutDirection) var layoutDirection
     
-    private var leadingColor: Color
-    private var trailingColor: Color
-    private var outlinedColor: Color?
+    private var ringColor: RingColor
     
     init(value: CGFloat, thickness: CGFloat, leadingColor: Color, trailingColor: Color, outlinedColor: Color? = nil, base: @escaping () -> BaseShape) {
         self.value = value
         self.thickness = thickness
         self.base = base
-        self.leadingColor = leadingColor
-        self.trailingColor = trailingColor
-        self.outlinedColor = outlinedColor
+        self.ringColor = .init(leading: leadingColor, trailing: trailingColor, outline: outlinedColor)
+    }
+    
+    init(value: CGFloat, thickness: CGFloat, ringColor: RingColor, base: @escaping () -> BaseShape) {
+        self.value = value
+        self.thickness = thickness
+        self.base = base
+        self.ringColor = ringColor
     }
     
     var body: some View {
         ZStack {
-            if let outlinedColor {
+            if let outlined = ringColor.outline {
                 base()
                     .stroke(lineWidth: thickness)
-                    .foregroundColor(outlinedColor)
+                    .foregroundColor(outlined)
             }
             drawn
         }
@@ -67,7 +70,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
 //            angle: progressAngle
 //        )
         .init(
-            colors: [trailingColor, leadingColor],
+            colors: [ringColor.trailing, ringColor.leading],
             center: .center,
             startAngle: apropiateStartAngle,
             endAngle: value > 0.1 ? progressAngle : .radians(2 * .pi * 0.1)
@@ -90,7 +93,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
         base()
             .trim(from: 0, to: 0.0001)
             .stroke(style: sStyle)
-            .foregroundColor(trailingColor)
+            .foregroundColor(ringColor.trailing)
 //            .mask {
 //                LinearGradient(
 //                    colors: [
@@ -108,7 +111,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
         base()
             .trim(from: 0, to: 0.0001)
             .stroke(style: sStyle)
-            .foregroundColor(leadingColor)
+            .foregroundColor(ringColor.leading)
 //            .transition(.asymmetric(insertion: .opacity.animation(.linear.speed(value)), removal: .opacity.animation(.none)))
             .shadow(color: .black, radius: 12)
             .mask {
@@ -134,17 +137,25 @@ extension ShapedProgressBar {
         self.thickness = thickness
 
         self.base = { shape }
-
-        self.leadingColor = .init(.displayP3, red: 0.15, green: 0.7, blue: 1)
-        self.trailingColor = .init(.displayP3, red: 0, green: 0.4, blue: 0.85)
+        
+        self.ringColor = .init(
+            leading: .init(.displayP3, red: 0.15, green: 0.7, blue: 1),
+            trailing: .init(.displayP3, red: 0, green: 0.4, blue: 0.85)
+        )
     }
     
     init(_ base: BaseShape, value: CGFloat, thickness: CGFloat, leadingColor: Color, trailingColor: Color, outlinedColor: Color? = nil) {
         self.value = value
         self.thickness = thickness
         self.base = { base }
-        self.leadingColor = leadingColor
-        self.trailingColor = trailingColor
-        self.outlinedColor = outlinedColor
+        
+        self.ringColor = .init(leading: leadingColor, trailing: trailingColor, outline: outlinedColor)
+    }
+    
+    init(_ base: BaseShape, value: CGFloat, thickness: CGFloat, ringColor: RingColor) {
+        self.value = value
+        self.thickness = thickness
+        self.base = { base }
+        self.ringColor = ringColor
     }
 }

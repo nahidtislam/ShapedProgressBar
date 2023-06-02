@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		25BB39032A2A204300CE4556 /* ButtonNeedingConfimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB39022A2A204300CE4556 /* ButtonNeedingConfimation.swift */; };
+		25BB39072A2A2E4600CE4556 /* StackedShapedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB39062A2A2E4600CE4556 /* StackedShapedProgressBar.swift */; };
+		25BB39092A2A2ED900CE4556 /* ShapedProgressBar+RingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB39082A2A2ED900CE4556 /* ShapedProgressBar+RingColor.swift */; };
+		25BB390B2A2A308F00CE4556 /* StackedShapedProgressBar+Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB390A2A2A308F00CE4556 /* StackedShapedProgressBar+Piece.swift */; };
+		25BB390D2A2A348700CE4556 /* Array+IndexFromIdentifiableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB390C2A2A348700CE4556 /* Array+IndexFromIdentifiableElement.swift */; };
 		25E5BE312A24D55100AB62A3 /* ShapedProgressBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5BE302A24D55100AB62A3 /* ShapedProgressBarApp.swift */; };
 		25E5BE332A24D55100AB62A3 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5BE322A24D55100AB62A3 /* PlayView.swift */; };
 		25E5BE352A24D55300AB62A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E5BE342A24D55200AB62A3 /* Assets.xcassets */; };
@@ -20,6 +24,10 @@
 
 /* Begin PBXFileReference section */
 		25BB39022A2A204300CE4556 /* ButtonNeedingConfimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNeedingConfimation.swift; sourceTree = "<group>"; };
+		25BB39062A2A2E4600CE4556 /* StackedShapedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedShapedProgressBar.swift; sourceTree = "<group>"; };
+		25BB39082A2A2ED900CE4556 /* ShapedProgressBar+RingColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShapedProgressBar+RingColor.swift"; sourceTree = "<group>"; };
+		25BB390A2A2A308F00CE4556 /* StackedShapedProgressBar+Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackedShapedProgressBar+Piece.swift"; sourceTree = "<group>"; };
+		25BB390C2A2A348700CE4556 /* Array+IndexFromIdentifiableElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+IndexFromIdentifiableElement.swift"; sourceTree = "<group>"; };
 		25E5BE2D2A24D55100AB62A3 /* ShapedProgressBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapedProgressBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E5BE302A24D55100AB62A3 /* ShapedProgressBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapedProgressBarApp.swift; sourceTree = "<group>"; };
 		25E5BE322A24D55100AB62A3 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -46,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				25E5BE482A2A00A200AB62A3 /* Color+HexStringInit.swift */,
+				25BB390C2A2A348700CE4556 /* Array+IndexFromIdentifiableElement.swift */,
 				25BB39022A2A204300CE4556 /* ButtonNeedingConfimation.swift */,
 				25E5BE2F2A24D55100AB62A3 /* ShapedProgressBar */,
 				25E5BE2E2A24D55100AB62A3 /* Products */,
@@ -68,6 +77,9 @@
 				25E5BE462A28BE4600AB62A3 /* SettingsData.swift */,
 				25E5BE442A28B9A900AB62A3 /* PlayViewSettings.swift */,
 				25E5BE422A24D5E200AB62A3 /* ShapedProgressBar.swift */,
+				25BB39082A2A2ED900CE4556 /* ShapedProgressBar+RingColor.swift */,
+				25BB39062A2A2E4600CE4556 /* StackedShapedProgressBar.swift */,
+				25BB390A2A2A308F00CE4556 /* StackedShapedProgressBar+Piece.swift */,
 				25E5BE342A24D55200AB62A3 /* Assets.xcassets */,
 				25E5BE362A24D55300AB62A3 /* Preview Content */,
 			);
@@ -152,13 +164,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25BB390B2A2A308F00CE4556 /* StackedShapedProgressBar+Piece.swift in Sources */,
+				25BB390D2A2A348700CE4556 /* Array+IndexFromIdentifiableElement.swift in Sources */,
 				25E5BE332A24D55100AB62A3 /* PlayView.swift in Sources */,
+				25BB39092A2A2ED900CE4556 /* ShapedProgressBar+RingColor.swift in Sources */,
 				25BB39032A2A204300CE4556 /* ButtonNeedingConfimation.swift in Sources */,
 				25E5BE432A24D5E200AB62A3 /* ShapedProgressBar.swift in Sources */,
 				25E5BE472A28BE4600AB62A3 /* SettingsData.swift in Sources */,
 				25E5BE312A24D55100AB62A3 /* ShapedProgressBarApp.swift in Sources */,
 				25E5BE492A2A00A200AB62A3 /* Color+HexStringInit.swift in Sources */,
 				25E5BE452A28B9A900AB62A3 /* PlayViewSettings.swift in Sources */,
+				25BB39072A2A2E4600CE4556 /* StackedShapedProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
