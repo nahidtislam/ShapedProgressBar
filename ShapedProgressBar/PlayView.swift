@@ -24,6 +24,9 @@ struct PlayView: View {
             Label("hello world!", systemImage: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
+            Text("shaped progress ring tester")
+                .font(.caption)
+                .foregroundColor(.accentColor)
             if !settings { Spacer() }
             shapesToFlipBy
                 .frame(width: 280, height: 280)
@@ -51,6 +54,16 @@ struct PlayView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 progress = 0.9
             }
+            useSlider = storedSettings.useSlider
+            if let lead = Color(hex: storedSettings.leadColor, colorSpace: .displayP3) {
+                leadColor = lead
+            }
+            if let trail = Color(hex: storedSettings.trailColor, colorSpace: .displayP3) {
+                trailColor = trail
+            }
+        }
+        .onChange(of: storedSettings.useSlider) { newValue in
+            useSlider = newValue
         }
         .navigationTitle("play")
     }
@@ -58,8 +71,10 @@ struct PlayView: View {
     private var shapesToFlipBy: some View {
         TabView {
             progress(shape: Circle()).padding()
-            progress(shape: Rectangle()).padding()
-            progress(shape: RoundedRectangle(cornerRadius: 30)).padding()
+            if storedSettings.allowOtherShape {
+                progress(shape: Rectangle()).padding()
+                progress(shape: RoundedRectangle(cornerRadius: 30)).padding()
+            }
             
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -89,7 +104,7 @@ struct PlayView: View {
     private var slider: some View {
         HStack {
             Text("progress")
-            Slider(value: $progress, in: 0.0...5.5, step: 0.01)
+            Slider(value: $progress, in: 0.0...storedSettings.maxValue, step: 0.01)
                 .tint(leadColor)
             Text(String(format: "%.2f", progress))
         }
@@ -113,11 +128,13 @@ struct PlayView: View {
             ColorPicker("outline", selection: $outlineColorHandler)
             if outlineColor != nil {
                 Button("remove") {
-                    outlineColorHandler = .clear
+                    withAnimation {
+                        outlineColorHandler = .clear
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(trailColor)
-                .transition(.move(edge: .trailing))
+                .transition(.move(edge: .trailing).combined(with: .scale(scale: 0.6, anchor: .trailing).combined(with: .opacity)))
             }
         }
         .padding()
