@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PlayView: View {
     
+    @AppStorage("settings") var storedSettings: SettingsData = SettingsData.base
+    
     @State private var progress = 0.0
     @State private var leadColor = Color.mint
     @State private var trailColor = Color.blue
@@ -44,7 +46,7 @@ struct PlayView: View {
             }
         }
         .padding()
-        .sheet(isPresented: $settings.animation(.easeOut(duration: 0.2))) { PlayViewSettings() }
+        .sheet(isPresented: $settings.animation(.easeOut(duration: 0.2))) { PlayViewSettings(settings: storedSettings) }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 progress = 0.9
