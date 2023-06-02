@@ -42,6 +42,7 @@ struct ShapedProgressBar<BaseShape: Shape>: View {
         .padding(thickness / 2)
         .rotationEffect(.radians(.pi / -2))
         .rotationEffect(layoutDirection == .rightToLeft ? .radians(.pi) : .zero)
+        .drawingGroup()
     }
     
     
