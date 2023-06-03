@@ -67,7 +67,7 @@ extension Color {
         let colorB = Int(colorComp[2] * 255)
         
         if colorComp.count == 4 && colorComp[3] < 1 {
-            let alpha = Int(colorComp[2] * 255)
+            let alpha = Int(colorComp[3] * 255)
             
             return String(format:"#%02x%02x%02x%02x", colorR, colorG, colorB, alpha)
         }
