@@ -24,7 +24,7 @@ struct StackedShapedProgressBar<BaseShape: InsettableShape>: View {
     
     func ring(color: ShapedProgressBar<BaseShape>.RingColor, inset: Double, value: Double) -> ShapedProgressBar<BaseShape> {
         ShapedProgressBar(
-            base().inset(by: inset),
+            base().inset(by: inset) as! BaseShape,
             value: value,
             thickness: thickness,
             ringColor: color
