@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayViewSettings: View {
     
-    @AppStorage("settings") var settings: SettingsData = .base
+    @State var settings: SettingsData = .base
     
     @State private var maxValue = "1.50"
     
@@ -65,6 +65,15 @@ struct PlayViewSettings: View {
             }
             .transformationAnimation(.spring(response: 0.3))
             .padding()
+        }
+        .onAppear {
+            if let loadedSettings = UserDefaults.standard.object(forKey: "settings") as? SettingsData {
+            settings = loadedSettings
+            }
+        }
+        .onDisappear {
+            let savingSettings = settings.rawValue
+            UserDefaults.standard.setValue(savingSettings, forKey: "settings")
         }
     }
     var leadColor: Binding<Color> {

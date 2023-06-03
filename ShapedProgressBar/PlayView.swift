@@ -63,6 +63,8 @@ struct PlayView: View {
             }
             if let outline = Color(hex: storedSettings.outlineColor ?? "nil", colorSpace: .displayP3) {
                 outlineColorHandler = outline
+            } else {
+                outlineColorHandler = .clear
             }
         }
         .onChange(of: storedSettings.useSlider) { newValue in
@@ -107,9 +109,17 @@ struct PlayView: View {
     private var slider: some View {
         HStack {
             Text("progress")
+                .padding(3)
+                .padding(.horizontal, 4)
+                .background(Material.regular)
+                .cornerRadius(8)
             Slider(value: $progress, in: 0.0...storedSettings.maxValue, step: 0.01)
                 .tint(leadColor)
             Text(String(format: "%.2f", progress))
+                .frame(width: 50)
+                .padding(3)
+                .background(Material.regular)
+                .cornerRadius(8)
         }
     }
     
